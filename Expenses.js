@@ -1,43 +1,63 @@
-import React, { Component } from 'react';
+import React, {Component} from "react";
 
 
-class expensesList extends Component {
-    constructor(props) {
-        super(props);
+ class ExpensesList extends React.Component {
+  state = {
+    expensesNames: "",
+    amount: [],
+    frequency: "",
+    
+  };
 
-        this.state = {
-            expenses: []
-        };
+  change = e => {
+    this.props.onChange({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
 
-        this.addExpenses = this.addExpenses.bind(this);
+  onSubmit = e => {
+    e.preventDefault();
+    // this.props.onSubmit(this.state);
+    this.setState({
+        expensesNames: "",
+        amount: [],
+        frequency: "",
+    });
+    this.props.onChange({
+        expensesNames: "",
+        amount: [],
+        frequency: "",
+    });
+  };
 
-
-    }
-    addExpenses(e)  {
-        if (this.inputElement.value !== "") {
-            let newExpenselist = {
-                text: this.inputElement.value,
-            };  
-        }
-
-    }
-
-    render() {
-        return (
-            <div className="expenseList">
-                <form onSubmit={this.addExpenses}>
-                    <label>Expenses:</label>
-                    <input  ref={(a)=> this.inputElement = a}
-                        placeholder="Enter expenses"
-                        className="form-control"
-                        
-                    />
-                    <button className="btn btn-dark btn-block mt-3">Submit</button>
-                </form>
-            </div>
-
-        )
-    }
+  render() {
+    return (
+      <form>
+        <input
+          name="expenseName"
+          placeholder="Expense name"
+          value={this.state.expensesNames}
+          onChange={e => this.change(e)}
+        />
+        <br />
+        <input
+          name="amount"
+          placeholder="Amount:"
+          value={this.state.amount}
+          onChange={e => this.change(e)}
+        />
+        <br />
+        <input
+          name="frequency"
+          placeholder="Frequency"
+          value={this.state.frequency}
+          onChange={e => this.change(e)}
+        />
+        <br />
+        <button onClick={e => this.onSubmit(e)}>Submit</button>
+      </form>
+    );
+  }
 }
-
 export default ExpensesList
