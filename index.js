@@ -1,7 +1,24 @@
-import React, { Component } from 'react';
+import React from "react";
+import ReactDOM from "react-dom";
+import './App.css';
+import SavingsTable from './Components/SavingsTable';
+import ExpenseTable from './Components/ExpenseTable';
+import BudgetTable from "./Components/BudgetTable";
 
-import Results from './Results';
-import Inputs from './Inputs';
-import Buttons from './Buttons';
-const btnsValue = [9,8,7,6,5,4,3,2,1,'.',0,'DEL'];
-const tipPercentages = [.05, .10, .15, .20];
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Savings </h1>
+      <SavingsTable />
+      <h2>Expenses</h2>
+      <ExpenseTable />
+      <h2>Budget</h2>
+      <BudgetTable />
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+
